@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: xports-reserve
+  cloud:
+    nacos:
+      config:
+        ## 是否启用
+        enabled: true
+        server-addr: localhost:8848
+        namespace: xxxx
+        file-extension: yml
+        extension-configs:
+          - data-id: ${spring.application.name}-logging.yml
+            refresh: true
+        username: nacos
+        password: nacos
