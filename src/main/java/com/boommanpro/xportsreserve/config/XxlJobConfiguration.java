@@ -13,7 +13,6 @@ public class XxlJobConfiguration {
 
     @Bean
     public XxlJobSpringExecutor xxlJobExecutor(XxlJobConfigProperties xxlJobConfigProperties) {
-        log.info(">>>>>>>>>>> xxl-job config init.");
         XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
         xxlJobSpringExecutor.setAdminAddresses(xxlJobConfigProperties.getAdminAddresses());
         xxlJobSpringExecutor.setAppname(xxlJobConfigProperties.getAppname());
