@@ -22,7 +22,7 @@ public class ReserveRequire implements Comparable<ReserveRequire> {
     /**
      * 是否预定成功
      */
-    private Boolean reserved = false;
+    private boolean reserved = false;
 
     private String targetDate;
 

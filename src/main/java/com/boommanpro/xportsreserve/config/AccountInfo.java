@@ -6,7 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,8 +34,12 @@ public class AccountInfo implements InitializingBean {
     }
 
     public Set<String> getRequireTimeKey(String targetDate) {
+        if (CollectionUtils.isEmpty(requires) || !StringUtils.hasText(targetDate)) {
+            log.error("targetDate or requires is empty, targetDate:{}, requires:{}", targetDate, requires);
+            return new HashSet<>();
+        }
         return requires.stream()
-                .filter(require -> require.getTargetDate().equals(targetDate) && require.getReserved())
+                .filter(require -> targetDate.equals(require.getTargetDate()) && require.isReserved())
                 .map(require -> String.format("%s-%s", require.getStartHour(), require.getEndHour()))
                 .collect(Collectors.toSet());
     }
