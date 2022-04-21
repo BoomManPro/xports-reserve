@@ -17,7 +17,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -56,7 +55,7 @@ public class VenueReserveService {
         log.info("reserveVenue account:{}, nowDate:{}", accountInfo, nowDate);
         List<CommitResult> commitInfoList = new ArrayList<>();
         //需要预定条件
-        Set<String> requireDateKey = accountInfo.getRequireTimeKey(nowDate);
+        List<String> requireDateKey = accountInfo.getTargetDateRequireTimeKey(nowDate);
         //获取预定列表Stream
         Stream<VenuesInfo> venuesInfoStream = config.getVenueSite()
                 .parallelStream()

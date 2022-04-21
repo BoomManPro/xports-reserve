@@ -9,9 +9,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
@@ -33,15 +32,15 @@ public class AccountInfo implements InitializingBean {
         log.info("accountInfo refresh set:{}", this);
     }
 
-    public Set<String> getRequireTimeKey(String targetDate) {
+    public List<String> getTargetDateRequireTimeKey(String targetDate) {
         if (CollectionUtils.isEmpty(requires) || !StringUtils.hasText(targetDate)) {
             log.error("targetDate or requires is empty, targetDate:{}, requires:{}", targetDate, requires);
-            return new HashSet<>();
+            return new ArrayList<>();
         }
         return requires.stream()
-                .filter(require -> targetDate.equals(require.getTargetDate()) && require.isReserved())
+                .filter(require -> targetDate.equals(require.getTargetDate()) && !require.isReserved())
                 .map(require -> String.format("%s-%s", require.getStartHour(), require.getEndHour()))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
 }
