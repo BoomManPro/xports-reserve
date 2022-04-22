@@ -2,7 +2,7 @@ package com.boommanpro.xportsreserve.rest.config;
 
 import org.junit.jupiter.api.Test;
 
-class RestConfigurationTest {
+class VenueReserveRestConfigurationTest {
 
     @Test
     public void venueReserveTest() throws Exception {

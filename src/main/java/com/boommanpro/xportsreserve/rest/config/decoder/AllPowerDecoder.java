@@ -1,4 +1,4 @@
-package com.boommanpro.xportsreserve.rest.config;
+package com.boommanpro.xportsreserve.rest.config.decoder;
 
 import feign.FeignException;
 import feign.Response;
