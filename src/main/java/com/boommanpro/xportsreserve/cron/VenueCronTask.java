@@ -1,7 +1,6 @@
 package com.boommanpro.xportsreserve.cron;
 
 import com.boommanpro.xportsreserve.config.AccountInfo;
-import com.boommanpro.xportsreserve.global.GlobalAccountStatus;
 import com.boommanpro.xportsreserve.model.CommitResult;
 import com.boommanpro.xportsreserve.service.FtNotifyAccountService;
 import com.boommanpro.xportsreserve.service.VenueReserveService;
@@ -30,9 +29,9 @@ public class VenueCronTask {
 
     @Scheduled(cron = "${xports.venues.refresh-cookie}")
     public void scheduleRefreshCookie() throws ExecutionException, InterruptedException {
-        if (GlobalAccountStatus.accountStatus) {
+        if (accountInfo.isCookieStatus()) {
             boolean status = venueReserveService.refreshSession(accountInfo);
-            GlobalAccountStatus.accountStatus = status;
+            accountInfo.setCookieStatus(status);
             if (!status) {
                 notifyWxAccountService.notifyRefreshSessionError(accountInfo.getSendKey());
             }

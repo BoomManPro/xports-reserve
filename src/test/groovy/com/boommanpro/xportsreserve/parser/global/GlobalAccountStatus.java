@@ -1,4 +1,4 @@
-package com.boommanpro.xportsreserve.global;
+package com.boommanpro.xportsreserve.parser.global;
 
 public class GlobalAccountStatus {
     public static boolean accountStatus = true;

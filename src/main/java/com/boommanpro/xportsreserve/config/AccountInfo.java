@@ -21,6 +21,8 @@ public class AccountInfo implements InitializingBean {
 
     private String cookie;
 
+    private boolean cookieStatus;
+
     private String requestUserAgent;
 
     private List<ReserveRequire> requires;
@@ -30,6 +32,7 @@ public class AccountInfo implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         log.info("accountInfo refresh set:{}", this);
+        cookieStatus = true;
     }
 
     public List<String> getTargetDateRequireTimeKey(String targetDate) {
