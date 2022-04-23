@@ -20,11 +20,8 @@ import java.util.Optional;
 public class XportsReserveApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(XportsReserveApplication.class, args);
-        ConfigurableEnvironment environment = context.getEnvironment();
-        String port = Optional.ofNullable(environment.getProperty("server.port")).orElse("8080");
-        String contextPath = Optional.ofNullable(environment.getProperty("servlet.context-path")).orElse("/");
-        log.info("Server Start Success , Link To Open : http://127.0.0.1:{}{}", port, contextPath);
+        SpringApplication.run(XportsReserveApplication.class, args);
+        log.info("Application Start Success");
     }
 
 }
