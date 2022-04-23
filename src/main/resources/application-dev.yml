@@ -1,27 +1,12 @@
 server:
   port: 8088
+
 xports:
   venues:
-    refresh-cookie: 0 0/5 * * * ?
-    reserve: 1 0 8 * * ?
-    pages:
-      venue-site:
-        - 1602
-        - 1610
     account:
       send-key: xxxx
       cookie: Mozilla/5.0 (iPhone; CPU iPhone OS 15_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.18(0x18001234) NetType/WIFI Language/zh_CN
       requires:
-        - { startHour: 42,endHour: 44, order: 1,targetDate: 20220325}
-        - { startHour: 38,endHour: 40, order: 2,targetDate: 20220326}
-        - { startHour: 36,endHour: 38, order: 2,targetDate: 20220326}
-
-xxl:
-  job:
-    enable: false
-
-
-logging:
-  level:
-    com.alibaba.cloud.nacos: debug
-    com.boommanpro.xportsreserve.rest: debug
+        - { startHour: 42,endHour: 44, order: 1,targetDate: 20220325 }
+        - { startHour: 38,endHour: 40, order: 2,targetDate: 20220326 }
+        - { startHour: 36,endHour: 38, order: 2,targetDate: 20220326 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Data
@@ -14,10 +15,10 @@ import java.util.List;
 @ConfigurationProperties(prefix = "xports.venues.pages")
 public class VenuePageConfigProperties implements InitializingBean {
 
-    private List<String> venueSite;
+    private List<String> venueSite = Arrays.asList("1602", "1610");
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-        log.info("venuePageConfig refresh set:{}", this);
+    public void afterPropertiesSet() {
+        log.debug("venuePageConfig refresh set:{}", this);
     }
 }

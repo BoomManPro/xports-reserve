@@ -31,7 +31,7 @@ public class AccountInfo implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        log.info("accountInfo refresh set:{}", this);
+        log.debug("accountInfo refresh set:{}", this);
         cookieStatus = true;
     }
 

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Slf4j
 @Configuration
-@ConditionalOnProperty(prefix = "xxl.job", name = "enable", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "xxl.job", name = "enable", havingValue = "true", matchIfMissing = false)
 public class XxlJobConfiguration {
 
     @Bean

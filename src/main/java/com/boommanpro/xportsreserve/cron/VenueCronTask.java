@@ -27,7 +27,7 @@ public class VenueCronTask {
     @Autowired
     private FtNotifyAccountService notifyWxAccountService;
 
-    @Scheduled(cron = "${xports.venues.refresh-cookie}")
+    @Scheduled(cron = "${xports.venues.refresh-cookie:0 0/5 * * * ?}")
     public void scheduleRefreshCookie() throws ExecutionException, InterruptedException {
         if (accountInfo.isCookieStatus()) {
             boolean status = venueReserveService.refreshSession(accountInfo);
@@ -40,7 +40,7 @@ public class VenueCronTask {
     }
 
 
-    @Scheduled(cron = "${xports.venues.reserve}")
+    @Scheduled(cron = "${xports.venues.reserve:1 0 8 * * ?}")
     public void scheduleReserve() {
         String nowDate = LocalDate.now().plusDays(4).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         if (accountInfo.getRequires().stream().anyMatch(require -> require.getTargetDate().equals(nowDate))) {
