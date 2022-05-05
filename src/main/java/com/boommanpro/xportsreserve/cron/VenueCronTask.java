@@ -35,7 +35,6 @@ public class VenueCronTask {
             if (!status) {
                 notifyWxAccountService.notifyRefreshSessionError(accountInfo.getSendKey());
             }
-
         }
     }
 
@@ -43,7 +42,7 @@ public class VenueCronTask {
     @Scheduled(cron = "${xports.venues.reserve:1 0 8 * * ?}")
     public void scheduleReserve() {
         String nowDate = LocalDate.now().plusDays(4).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        if (accountInfo.getRequires().stream().anyMatch(require -> require.getTargetDate().equals(nowDate))) {
+        if (accountInfo.isCookieStatus() && accountInfo.needReserve(nowDate)) {
             List<CommitResult> commitResults = venueReserveService.reserveVenue(accountInfo, nowDate);
             notifyWxAccountService.notifyReserveStatus(accountInfo.getSendKey(), commitResults);
         }

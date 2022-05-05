@@ -1,8 +1,8 @@
 package com.boommanpro.xportsreserve.dependency;
 
+import com.boommanpro.xportsreserve.model.AsyncResult;
 import com.boommanpro.xportsreserve.model.CommitInfo;
 import com.boommanpro.xportsreserve.model.CommitResult;
-import com.boommanpro.xportsreserve.model.AsyncResult;
 import com.boommanpro.xportsreserve.model.VenuePage;
 import com.boommanpro.xportsreserve.rest.VenueReserveClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;

@@ -2,7 +2,6 @@ package com.boommanpro.xportsreserve.service;
 
 import com.boommanpro.xportsreserve.config.AccountInfo;
 import com.boommanpro.xportsreserve.config.VenuePageConfigProperties;
-import com.boommanpro.xportsreserve.dependency.ReserveVenueDependency;
 import com.boommanpro.xportsreserve.model.CommitInfo;
 import com.boommanpro.xportsreserve.model.CommitResult;
 import com.boommanpro.xportsreserve.model.VenuePage;
@@ -19,7 +18,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -33,26 +31,15 @@ public class VenueReserveService {
     @Autowired
     private VenueReserveClient venueReserveClient;
 
-    @Autowired
-    private ReserveVenueDependency reserveVenueDependency;
-
-
     public boolean refreshSession(AccountInfo accountInfo) throws ExecutionException, InterruptedException {
-        log.info("refresh Session account:{}", accountInfo);
+        log.debug("refresh Session account:{}, venuePageConfig:{}.", accountInfo, config);
         String nowDate = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        for (String venueSite : config.getVenueSite()) {
-            Future<VenuePage> venuePageFuture = reserveVenueDependency.asyncQueryPage(venueSite, nowDate, accountInfo.getCookie());
-            if (!venuePageFuture.get().hasContent()) {
-                log.error("user refresh session error.");
-                return false;
-            }
-        }
-        return true;
+        return config.getVenueSite().stream().findFirst().map(venueSite -> venueReserveClient.queryPage(venueSite, nowDate, accountInfo.getCookie()).hasContent()).orElse(false);
     }
 
     @SuppressWarnings("rawtypes")
     public List<CommitResult> reserveVenue(AccountInfo accountInfo, String nowDate) {
-        log.info("reserveVenue account:{}, nowDate:{}", accountInfo, nowDate);
+        log.debug("reserveVenue account:{}, reverseDate:{}, venuePageConfig:{}.", accountInfo, nowDate, config);
         List<CommitResult> commitInfoList = new ArrayList<>();
         //需要预定条件
         List<String> requireDateKey = accountInfo.getTargetDateRequireTimeKey(nowDate);

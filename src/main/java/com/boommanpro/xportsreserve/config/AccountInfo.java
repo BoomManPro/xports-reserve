@@ -46,4 +46,8 @@ public class AccountInfo implements InitializingBean {
                 .collect(Collectors.toList());
     }
 
+    public boolean needReserve(String date) {
+        return getRequires().stream().anyMatch(require -> require.getTargetDate().equals(date));
+    }
+
 }

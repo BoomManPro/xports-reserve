@@ -19,11 +19,16 @@ public class FtNotifyAccountService {
     private FtServerNotifyClient ftServerNotifyClient;
 
     public void notifyRefreshSessionError(String sendKey) {
-        FtServerResult result = ftServerNotifyClient.send(sendKey, new FtServerBody("refreshSessionError", "手动登录nacos刷新"));
+        FtServerResult result = ftServerNotifyClient.send(sendKey, new FtServerBody("刷新Cookie登录态失败", "需要手动登录nacos刷新"));
         log.info("notify result:{}", result);
     }
 
     public void notifyReserveStatus(String sendKey, List<CommitResult> commitResults) {
+        if (commitResults.isEmpty()) {
+            FtServerResult result = ftServerNotifyClient.send(sendKey, new FtServerBody("预定失败,待支付列表为空", ""));
+            log.info("notify result:{}", result);
+            return;
+        }
         FtServerResult result = ftServerNotifyClient.send(sendKey, new FtServerBody("预定成功，尽快付款", JSON.toJSONString(commitResults)));
         log.info("notify result:{}", result);
     }
