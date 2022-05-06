@@ -32,4 +32,9 @@ public class FtNotifyAccountService {
         FtServerResult result = ftServerNotifyClient.send(sendKey, new FtServerBody("预定成功，尽快付款", JSON.toJSONString(commitResults)));
         log.info("notify result:{}", result);
     }
+
+    public void notifyMessage(String sendKey, String text, String desp) {
+        FtServerResult result = ftServerNotifyClient.send(sendKey, new FtServerBody(text, desp));
+        log.info("notify result:{}", result);
+    }
 }
