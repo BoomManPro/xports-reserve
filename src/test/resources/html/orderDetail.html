@@ -1,0 +1,310 @@
+<input type="hidden" value="/aisports-weixin" id="wr">
+<input type="hidden" value="http://xports-prd.oss-cn-hangzhou.aliyuncs.com/" id="ossUrl">
+<input type="hidden" value="" id="type">
+<script type="text/javascript" src="/assets/weixin/src/js/utils/vconsole.js"></script>
+<script>
+    if (JSON.parse(localStorage.getItem('vConsoleTools'))) {
+        var vConsole = new VConsole();
+    }
+</script>
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <title>订单详情</title>
+    <link rel="stylesheet" href="/assets/weixin/build/orderdetails.css?v=2.8.3"/>
+    <script type='text/javascript'>
+        /**
+         * Created by Nightost  on 2015/7/7.
+         * tks tb
+         */
+        !function (win) {
+            var v, initialScaleVal, t, doc = win.document,
+                docEl = doc.documentElement,
+                viewMetaEl = doc.querySelector('meta[name="viewport"]'),
+                flexibleMetaEl = doc.querySelector('meta[name="flexible"]');
+
+            function initialRootFontSize() {
+                var docWidth = docEl.getBoundingClientRect().width;
+                docWidth / v > 540 && (docWidth = 540 * v), win.rem = docWidth / 16, docEl.style.fontSize = win.rem + "px"
+            }
+
+            if (viewMetaEl) {
+                console.warn("将根据已有的meta标d签来设置缩放比例");
+                var hasInitialScale = viewMetaEl.getAttribute("content").match(/initial\-scale=(["']?)([\d\.]+)\1?/);
+                hasInitialScale && (initialScaleVal = parseFloat(hasInitialScale[2]), v = parseInt(1 / initialScaleVal))
+            } else {
+                if (flexibleMetaEl) {
+                    var hasInitialScale = flexibleMetaEl.getAttribute("content").match(/initial\-dpr=(["']?)([\d\.]+)\1?/);
+                    hasInitialScale && (v = parseFloat(hasInitialScale[2]), initialScaleVal = parseFloat((1 / v).toFixed(2)))
+                }
+            }
+            if (!v && !initialScaleVal) {
+                var n = (win.navigator.appVersion.match(/android/gi), win.navigator.appVersion.match(/iphone/gi)),
+                    v = win.devicePixelRatio;
+                v = n ? v >= 3 ? 3 : v >= 2 ? 2 : 1 : 1, initialScaleVal = 1 / v
+            }
+            if (docEl.setAttribute("data-dpr", v), !viewMetaEl) {
+                if (viewMetaEl = doc.createElement("meta"), viewMetaEl.setAttribute("name", "viewport"), viewMetaEl.setAttribute("content", "initial-scale=" + initialScaleVal + ", maximum-scale=" + initialScaleVal + ", minimum-scale=" + initialScaleVal + ", user-scalable=no"), docEl.firstElementChild) {
+                    docEl.firstElementChild.appendChild(viewMetaEl)
+                } else {
+                    var m = doc.createElement("div");
+                    m.appendChild(viewMetaEl), doc.write(m.innerHTML)
+                }
+            }
+            win.dpr = v;
+            win.addEventListener("resize", function () {
+                clearTimeout(t), t = setTimeout(initialRootFontSize, 300)
+            }, false);
+            win.addEventListener("pageshow", function (b) {
+                b.persisted && (clearTimeout(t), t = setTimeout(initialRootFontSize, 300))
+            }, false);
+            "complete" === doc.readyState ? doc.body.style.fontSize = 12 * v + "px" : doc.addEventListener("DOMContentLoaded", function () {
+                doc.body.style.fontSize = 12 * v + "px"
+            }, false);
+            initialRootFontSize();
+
+        }(window);
+        !function () {
+            var classNames = [];
+            if (navigator.userAgent.match(/(iPad|iPhone|iPod)/i)) classNames.push('device-ios');
+            if (navigator.userAgent.match(/android/i)) classNames.push('device-android');
+
+            var html = document.getElementsByTagName('html')[0];
+
+            if (classNames.length) classNames.push('on-device');
+            if (html.classList) html.classList.add.apply(html.classList, classNames);
+        }()
+        //进行统计
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?bc864c0a0574a7cabe6b36d53206fb69";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        (function () {
+            if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+                handleFontSize();
+            } else {
+                if (document.addEventListener) {
+                    document.addEventListener("WeixinJSBridgeReady", handleFontSize, false);
+                } else if (document.attachEvent) {
+                    //IE浏览器，非W3C规范
+                    document.attachEvent("onWeixinJSBridgeReady", handleFontSize);
+                }
+            }
+
+            function handleFontSize() {
+                // 设置网页字体为默认大小
+                WeixinJSBridge.invoke('setFontSizeCallback', {'fontSize': 0});
+                // 重写设置网页字体大小的事件
+                WeixinJSBridge.on('menu:setfont', function () {
+                    WeixinJSBridge.invoke('setFontSizeCallback', {'fontSize': 0});
+                });
+            }
+        })();
+    </script>
+</head>
+<body data-web-root="/aisports-weixin">
+<input type="hidden" value="http://xports-prd.oss-cn-hangzhou.aliyuncs.com/" id="ossUrl">
+<input type="hidden" value="11" id="tradeTypeCode">
+<div class="w">
+    <div class="detailinfo" data-type="cancelOrder">
+        <div class="info-head info-head-cancel">
+            <div class="info-title order-info" data-tradeid="2022050603879158"
+                 data-custid="0" data-ecardno=""
+            >订单信息
+            </div>
+        </div>
+        <div class="list-item-box">
+            <input type="hidden" id="tradeId" value="2022050603879158">
+            <div class="list-item">
+                <div class="item-name">订单编号：</div>
+                <div class="item-detail">2022050603879158</div>
+            </div>
+            <div class="list-item">
+                <div class="item-name">订单金额：</div>
+                <div class="item-detail">88元</div>
+            </div>
+            <div class="list-item">
+                <div class="item-name">订单时间：</div>
+                <div class="item-detail">2022-05-06 13:31:37</div>
+            </div>
+            <div class="list-item">
+                <div class="item-name">订单状态：</div>
+                <div class="item-detail" id="orderState" data-type="2">
+                    未支付(过期)
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--取消订单-->
+    <div class="detailinfo activeinfo" data-type="refundTicket">
+        <div class="info-head">
+            <div class="info-title">订场信息</div>
+        </div>
+
+        <input type="hidden" value="9" class="li-sate">
+        <div class="activedetail">
+            <input type="hidden" class="cashpledge-ipt" value="0">
+            <div class="forcheck">
+                <div class="checkinfo" style="display: none;">
+                    <div class="field" style="display: none">2022050653339987</div>
+                    <div class="backFee" style="display: none">0</div>
+                    <div class="cashPledge"
+                         style="display: none">0
+                    </div>
+                </div>
+                <input type="hidden" class="doorSupportTag" value="0">
+                <input type="hidden" class="openDoorTag" value="">
+                <input type="hidden" class="ticketBeforeTime" value="">
+                <ul class="">
+                    <li>
+                        <span class="active-li-left">使用日期：</span>
+                        <span class="active-li-right">2022-5-7</span>
+                    </li>
+                    <li>
+                        <span class="active-li-left">使用时间：</span>
+                        <span class="active-li-right segmentStr">
+                                                21:00
+                                --
+                                    22:00
+                            </span>
+                    </li>
+                    <li>
+                        <span class="active-li-left">场馆信息：</span>
+                        <span class="active-li-right-box"><i
+                                class="venueName">北京天通苑体育馆</i>
+                                        <i class="iconfont icon-navigate" data-type="navigate"
+                                           data-name="北京天通苑体育馆"
+                                           data-address="立水桥东二路与太平庄中一街交叉口东南方向天通中苑1区75号"
+                                           data-latitude="40.069782"
+                                           data-longitude="116.42516"></i>
+                            </span>
+                    </li>
+                    <li>
+                        <span class="active-li-left">场地号：</span>
+                        <span class="active-li-right ticketTypeName">羽毛球（蓝羽区）-临11</span>
+                    </li>
+                    <li>
+                        <span class="active-li-left">票信息：</span>
+                        <span class="active-li-right active-li-right-red">
+                                            未付款
+                                            <i class="split">|</i>
+                                            <i class="ticketNoSpan" data-ticket-id="160533399873980">
+                                            券号:160533399873980
+                                            </i>
+                                        </span>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="infopay" style="display: none">
+                <div class="infopay-parent infopay-parent-red">
+                    <div class="infopay-name">可退金额：</div>
+                    <input type="hidden" data-el="couponMoney" value="0"
+                           data-tag="0">
+                    <div class="infopay-num">&yen;<i
+                            data-type="real">0</i><i
+                            data-type="servicefee"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" style="display: none;" id="confirmRefund" class="btn-full-line">确认退款</button>
+<button type="button" style="display: none;" id="confirmCommit" class="btn-full-line">确认提交</button>
+
+
+<div class="prompt success-box" style="display: none;">
+    <div class="icon icon-success"></div>
+    <div class="title"></div>
+    <button type="button" class="btn btn-default medium" onclick="location.reload(true)">完成</button>
+</div>
+
+<div class="prompt failure-box" style="display: none">
+    <div class="icon icon-fail"></div>
+    <div class="title"></div>
+    <button type="button" class="btn btn-primary medium" onclick="window.location.href='/aisports-weixin/order/query'">
+        订单查询
+    </button>
+    <button type="button" class="btn btn-primary medium"
+            onclick="window.location.href='/aisports-weixin/member/homePage'">
+        我的账户
+    </button>
+    <button type="button" class="btn btn-default medium" onclick="location.reload(true)">返回</button>
+</div>
+
+<div class="cover-box cover-box-code" style="display: none;">
+    <div class="inner">
+        <div class="cover-code-box">
+            <div class="main-name"></div>
+            <div class="sub-name ticketTypeName"></div>
+            <div class="sub-name segmentStr"></div>
+            <div class="code-box" id="qrcode"></div>
+            <div class="sub-name ticketNo"></div>
+            <div class="close-box">
+                <div class="iconfont icon-close"></div>
+            </div>
+            <div class="cover-door-box" style="display: none">
+                <div class="door-btn">
+                    <div class="iconfont icon-kaimen"></div>
+                    <span>开门</span>
+                </div>
+                <div class="door-tips" style="display: none">
+                    <i>i</i>
+                    <span>开场前<span id="ticketBeforeTime"></span>开启</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="cover-box cover-box-confirmChoose" style="display: none;">
+    <div class="inner-box">
+        <div class="inner">
+            <div class="subtitle">退订须知</div>
+            <div class="coursedetail align-left"></div>
+            <div class="btn-line">
+                <div class="btn btn-cancel btn-cancel-other">关闭</div>
+                <div class="btn btn-confirm btn-confirm-other">确认</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cover-box cover-box-confirmKnow" style="display: none;" id="invoice-cover">
+    <div class="inner-box">
+        <div class="inner">
+            <div class="subtitle">
+            </div>
+            <div class="coursedetail align-left">该订单已经开具发票，如需退款请至场馆前台进行办理！</div>
+            <div class="btn-line-course">
+                <button type="button" class="btn btn-confirm">我知道了</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script type="text/javascript">
+    wx.config({
+        beta: true,
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: 'wx72b06ead98e64dc2', // 必填，公众号的唯一标识
+        timestamp: 1651834795, // 必填，生成签名的时间戳
+        nonceStr: 'b8637149e77f424eafa04549efb9a91e', // 必填，生成签名的随机串
+        signature: '9635a172abece8c09334c8a9831625945f488621',// 必填，签名，见附录1
+        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage',
+            'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone',
+            'closeWindow', 'chooseWXPay', 'openLocation', 'getLocation', 'scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+</script>
+<input type="hidden" id="webRoot" value='/aisports-weixin'/>
+<script type="text/javascript" src="/assets/weixin/build/orderdetails.js?v=2.8.3"></script>
+</body>
+</html>
